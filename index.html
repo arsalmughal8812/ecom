@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NovaTech | Smart Electronics for Modern Living</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f6f8fc;
+      --text: #111827;
+      --muted: #6b7280;
+      --surface: #ffffff;
+      --accent: #2563eb;
+      --accent-dark: #1d4ed8;
+      --line: #e5e7eb;
+      --success: #16a34a;
+      --shadow: 0 12px 30px rgba(17, 24, 39, 0.08);
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #f9fbff, #f4f7fc 32%, #f6f8fc);
+      line-height: 1.5;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+      border-radius: 12px;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(1140px, 92%);
+      margin: 0 auto;
+    }
+
+    .top-bar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(8px);
+      background: rgba(255, 255, 255, 0.88);
+      border-bottom: 1px solid rgba(229, 231, 235, 0.7);
+    }
+
+    header {
+      min-height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 12px 0;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: #0f172a;
+    }
+
+    .logo span {
+      color: var(--accent);
+    }
+
+    nav {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+      font-weight: 500;
+      color: #1f2937;
+    }
+
+    nav a {
+      padding: 8px 10px;
+      border-radius: 10px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    nav a:hover {
+      background: #eff6ff;
+      color: var(--accent-dark);
+    }
+
+    .search {
+      position: relative;
+      min-width: 210px;
+      flex: 1;
+      max-width: 320px;
+    }
+
+    .search input {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 11px 16px;
+      font-size: 0.95rem;
+      outline: none;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .search input:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.14);
+    }
+
+    .hero {
+      padding: 46px 0 20px;
+      display: grid;
+      grid-template-columns: 1.05fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .hero-content h1 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .hero-content p {
+      color: var(--muted);
+      margin-bottom: 22px;
+      max-width: 52ch;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 22px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: var(--accent);
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      background: var(--accent-dark);
+    }
+
+    .hero-media {
+      position: relative;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      min-height: 360px;
+    }
+
+    .hero-media img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0;
+    }
+
+    .hero-badge {
+      position: absolute;
+      left: 14px;
+      bottom: 14px;
+      background: rgba(17, 24, 39, 0.82);
+      color: #fff;
+      padding: 9px 13px;
+      border-radius: 11px;
+      font-size: 0.84rem;
+    }
+
+    section {
+      padding: 40px 0;
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      margin-bottom: 18px;
+      gap: 12px;
+    }
+
+    .section-head h2 {
+      font-size: 1.55rem;
+    }
+
+    .section-head p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .product-grid,
+    .category-grid,
+    .review-grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .product-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .product-card,
+    .category-card,
+    .review-card {
+      background: var(--surface);
+      border: 1px solid #ebedf0;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .product-card img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: 0;
+    }
+
+    .product-info {
+      padding: 14px;
+    }
+
+    .product-info h3 {
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+
+    .product-info p {
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #0f172a;
+    }
+
+    .btn-secondary {
+      width: 100%;
+      background: #eef2ff;
+      color: #1e3a8a;
+      border: 1px solid #dbeafe;
+    }
+
+    .btn-secondary:hover {
+      background: #dbeafe;
+    }
+
+    .category-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .category-card {
+      position: relative;
+      min-height: 170px;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .category-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .category-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0;
+      filter: brightness(0.84);
+    }
+
+    .category-label {
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      color: #fff;
+      font-weight: 700;
+      background: rgba(17, 24, 39, 0.52);
+      padding: 7px 10px;
+      border-radius: 9px;
+    }
+
+    .review-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .review-card {
+      padding: 16px;
+    }
+
+    .review-top {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .review-top img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .stars {
+      color: #f59e0b;
+      font-size: 0.95rem;
+      margin-bottom: 8px;
+    }
+
+    .review-card p {
+      color: #374151;
+      font-size: 0.94rem;
+    }
+
+    footer {
+      background: #0f172a;
+      color: #e5e7eb;
+      margin-top: 18px;
+      padding: 34px 0;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr 1fr;
+      gap: 18px;
+    }
+
+    .footer-col h3 {
+      margin-bottom: 10px;
+      font-size: 1.05rem;
+      color: #f8fafc;
+    }
+
+    .footer-col a,
+    .footer-col li {
+      display: block;
+      margin-bottom: 8px;
+      color: #cbd5e1;
+      font-size: 0.92rem;
+    }
+
+    .newsletter {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      flex-wrap: wrap;
+    }
+
+    .newsletter input {
+      flex: 1;
+      min-width: 200px;
+      border-radius: 10px;
+      border: 1px solid #334155;
+      background: #1e293b;
+      color: #fff;
+      padding: 11px;
+      outline: none;
+    }
+
+    .newsletter button {
+      border-radius: 10px;
+      padding: 11px 14px;
+    }
+
+    .copy {
+      margin-top: 20px;
+      color: #94a3b8;
+      font-size: 0.86rem;
+      border-top: 1px solid rgba(148, 163, 184, 0.22);
+      padding-top: 14px;
+      text-align: center;
+    }
+
+    @media (max-width: 1024px) {
+      .hero,
+      .product-grid,
+      .category-grid,
+      .review-grid,
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .hero-media {
+        min-height: 300px;
+      }
+    }
+
+    @media (max-width: 680px) {
+      header {
+        justify-content: center;
+      }
+
+      nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+      .search {
+        order: 2;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .hero,
+      .product-grid,
+      .category-grid,
+      .review-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding-top: 26px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar">
+    <div class="container">
+      <header>
+        <a class="logo" href="#">Nova<span>Tech</span></a>
+        <nav aria-label="Main Navigation">
+          <a href="#">Home</a>
+          <a href="#shop">Shop</a>
+          <a href="#about">About Us</a>
+          <a href="#contact">Contact</a>
+          <a href="#cart">Cart</a>
+        </nav>
+        <div class="search">
+          <input type="search" placeholder="Search products…" aria-label="Search products" />
+        </div>
+      </header>
+    </div>
+  </div>
+
+  <main>
+    <div class="container">
+      <section class="hero" id="shop">
+        <div class="hero-content">
+          <h1>Find Your Perfect Electronics Today!</h1>
+          <p>
+            Discover premium gadgets, smart home essentials, and must-have tech accessories.
+            Shop trusted internet-powered devices built for work, play, and everyday convenience.
+          </p>
+          <a href="#featured" class="btn btn-primary">Shop Now</a>
+        </div>
+        <div class="hero-media" aria-label="Featured electronics promotion">
+          <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80" alt="Modern workspace with laptop, tablet, and phone" />
+          <div class="hero-badge">🔥 Limited-time offers up to 40% off</div>
+        </div>
+      </section>
+
+      <section id="featured">
+        <div class="section-head">
+          <div>
+            <h2>Featured Products</h2>
+            <p>Top-rated picks and new arrivals curated for you.</p>
+          </div>
+        </div>
+        <div class="product-grid">
+          <article class="product-card">
+            <img src="https://images.unsplash.com/photo-1583394838336-acd977736f90?auto=format&fit=crop&w=800&q=80" alt="Wireless noise-cancelling headphones" />
+            <div class="product-info">
+              <h3>Pulse Pro Headphones</h3>
+              <p>Immersive sound with adaptive noise cancellation.</p>
+              <div class="price">$199.00</div>
+              <button class="btn btn-secondary">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <img src="https://images.unsplash.com/photo-1541807084-5c52b6b3adef?auto=format&fit=crop&w=800&q=80" alt="Smartwatch with fitness tracking interface" />
+            <div class="product-info">
+              <h3>AeroFit Smartwatch</h3>
+              <p>Track health, sync calls, and stay productive.</p>
+              <div class="price">$149.00</div>
+              <button class="btn btn-secondary">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <img src="https://images.unsplash.com/photo-1527443224154-c4d5f6f5d617?auto=format&fit=crop&w=800&q=80" alt="Compact Bluetooth speaker on table" />
+            <div class="product-info">
+              <h3>Echo Mini Speaker</h3>
+              <p>Portable, punchy audio with 18-hour battery life.</p>
+              <div class="price">$79.00</div>
+              <button class="btn btn-secondary">Add to Cart</button>
+            </div>
+          </article>
+
+          <article class="product-card">
+            <img src="https://images.unsplash.com/photo-1593642532400-2682810df593?auto=format&fit=crop&w=800&q=80" alt="Slim laptop for work and gaming" />
+            <div class="product-info">
+              <h3>NovaBook Air 14"</h3>
+              <p>Lightweight performance laptop for everyday power.</p>
+              <div class="price">$899.00</div>
+              <button class="btn btn-secondary">Add to Cart</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div>
+            <h2>Shop by Category</h2>
+            <p>Explore our most popular tech collections.</p>
+          </div>
+        </div>
+        <div class="category-grid">
+          <a class="category-card" href="#" aria-label="Shop laptops and computers">
+            <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80" alt="Laptop and accessories on desk" />
+            <span class="category-label">Laptops & Computers</span>
+          </a>
+          <a class="category-card" href="#" aria-label="Shop smart home devices">
+            <img src="https://images.unsplash.com/photo-1558089687-f282ffcbc0d4?auto=format&fit=crop&w=900&q=80" alt="Smart home speaker and automation devices" />
+            <span class="category-label">Smart Home</span>
+          </a>
+          <a class="category-card" href="#" aria-label="Shop audio gadgets">
+            <img src="https://images.unsplash.com/photo-1589003077984-894e133dabab?auto=format&fit=crop&w=900&q=80" alt="Wireless earbuds and audio accessories" />
+            <span class="category-label">Audio & Wearables</span>
+          </a>
+          <a class="category-card" href="#" aria-label="Shop phone accessories">
+            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=900&q=80" alt="Modern smartphone with colorful display" />
+            <span class="category-label">Phones & Accessories</span>
+          </a>
+        </div>
+      </section>
+
+      <section id="about">
+        <div class="section-head">
+          <div>
+            <h2>What Customers Say</h2>
+            <p>Trusted by thousands of happy tech shoppers.</p>
+          </div>
+        </div>
+        <div class="review-grid">
+          <article class="review-card">
+            <div class="review-top">
+              <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Customer profile of Sarah" />
+              <div>
+                <strong>Sarah N.</strong>
+                <div class="stars">★★★★★</div>
+              </div>
+            </div>
+            <p>
+              “Super fast delivery and excellent quality. My new smartwatch paired instantly and works perfectly!”
+            </p>
+          </article>
+
+          <article class="review-card">
+            <div class="review-top">
+              <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Customer profile of Daniel" />
+              <div>
+                <strong>Daniel R.</strong>
+                <div class="stars">★★★★★</div>
+              </div>
+            </div>
+            <p>
+              “Great prices and sleek product selection. The headphones feel premium and the battery life is unreal.”
+            </p>
+          </article>
+
+          <article class="review-card">
+            <div class="review-top">
+              <img src="https://randomuser.me/api/portraits/women/12.jpg" alt="Customer profile of Priya" />
+              <div>
+                <strong>Priya K.</strong>
+                <div class="stars">★★★★☆</div>
+              </div>
+            </div>
+            <p>
+              “The website is super easy to navigate and checkout was quick. I signed up for deals and saved a lot.”
+            </p>
+          </article>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>NovaTech</h3>
+          <p>Modern electronics for connected lifestyles. Curated products, secure checkout, and dedicated support.</p>
+        </div>
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <a href="#">FAQs</a>
+          <a href="#">Contact Support</a>
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Instagram</a>
+          <a href="#">Facebook</a>
+          <a href="#">X (Twitter)</a>
+        </div>
+        <div class="footer-col">
+          <h3>Stay Updated</h3>
+          <p>Sign up for exclusive deals!</p>
+          <form class="newsletter" action="#">
+            <input type="email" placeholder="Enter your email" aria-label="Email address" />
+            <button class="btn btn-primary" type="submit">Subscribe</button>
+          </form>
+        </div>
+      </div>
+      <div class="copy">© 2026 NovaTech. All rights reserved.</div>
+    </div>
+  </footer>
+</body>
+</html>
